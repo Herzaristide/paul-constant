@@ -10,6 +10,7 @@
 
   programs.home-manager.enable = true;
   programs.fish.enable = true;
+  programs.git.enable = true;
 
   home.sessionVariables = {
     EDITOR = "nano";
@@ -25,6 +26,7 @@
 
     # Gaming
     prismlauncher
+    heroic
 
     # AI tooling — claude-code is the official CLI; claude-desktop is the
     # community-packaged desktop app (available in nixos-unstable).
