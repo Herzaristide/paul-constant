@@ -6,6 +6,10 @@
 }:
 
 {
+  imports = [
+    ./chromium.nix
+  ];
+
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
@@ -13,23 +17,35 @@
 
   home.sessionVariables = {
     EDITOR = "nano";
-    BROWSER = "brave";
+    BROWSER = "chromium";
     TERMINAL = "gnome-terminal";
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "chromium-browser.desktop";
+      "x-scheme-handler/http" = "chromium-browser.desktop";
+      "x-scheme-handler/https" = "chromium-browser.desktop";
+      "x-scheme-handler/about" = "chromium-browser.desktop";
+      "x-scheme-handler/unknown" = "chromium-browser.desktop";
+    };
   };
 
   home.packages = with pkgs; [
     # Browsers / chat / office
-    brave
     vesktop
     onlyoffice-desktopeditors
+    teams-for-linux
+    zoom-us
 
     # Gaming
     prismlauncher
 
-    # AI tooling — claude-code is the official CLI; claude-desktop is the
-    # community-packaged desktop app (available in nixos-unstable).
+    # AI tooling — claude-code est le CLI officiel. Claude lui-même est
+    # installé comme PWA via la policy Chromium dans home/chromium.nix
+    # (WebAppInstallForceList sur https://claude.ai/new).
     claude-code
-    claude-desktop
 
     # Misc CLI niceties from the original config
     micro
@@ -60,12 +76,11 @@
     };
     "org/gnome/shell" = {
       favorite-apps = [
-        "brave-browser.desktop"
+        "chromium-browser.desktop"
         "vesktop.desktop"
         "DesktopEditors.desktop"
         "org.prismlauncher.PrismLauncher.desktop"
         "steam.desktop"
-        "claude-desktop.desktop"
         "org.gnome.Nautilus.desktop"
         "org.gnome.Console.desktop"
       ];

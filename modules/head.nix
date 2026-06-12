@@ -7,6 +7,12 @@
   # GNOME Keyring (Secret Service) — unlocked by PAM at login
   services.gnome.gnome-keyring.enable = true;
 
+  # Backends de stockage pour Nautilus : disques externes, partitions, réseau
+  # (SMB/SFTP/etc.), corbeille. Sans ça, "Other Locations" reste vide et les
+  # USB ne se montent pas auto.
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
   # XDG Portal for file pickers, screen sharing, etc.
   xdg.portal = {
     enable = true;

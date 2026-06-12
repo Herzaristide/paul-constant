@@ -14,6 +14,7 @@
     ../../modules/kernel.nix
     ../../modules/network.nix
     ../../modules/power.nix
+    ../../modules/swap.nix
     ../../modules/security.nix
     ../../modules/audio.nix
     ../../modules/head.nix
@@ -22,8 +23,9 @@
 
   networking.hostName = "constant";
 
-  head = true;
   primaryUser = "constant";
+
+  hardware.cpu.intel.updateMicrocode = true;
 
   # Bootloader (UEFI / systemd-boot)
   boot.loader.grub.enable = false;

@@ -59,6 +59,17 @@
                     "ssd"
                   ];
                 };
+                # Dédié au swapfile : pas de compression ni de COW (incompatibles
+                # avec un fichier swap). NixOS le créera via `btrfs filesystem
+                # mkswapfile`, qui applique NOCOW au fichier lui-même.
+                "@swap" = {
+                  mountpoint = "/swap";
+                  mountOptions = [
+                    "noatime"
+                    "space_cache=v2"
+                    "ssd"
+                  ];
+                };
               };
             };
           };

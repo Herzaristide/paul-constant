@@ -12,12 +12,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  options.head = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Enable head (GUI) configuration";
-  };
-
   options.primaryUser = lib.mkOption {
     type = lib.types.str;
     description = "Login name of the primary normal user on this host.";
@@ -49,18 +43,7 @@
     };
 
     time.timeZone = "Europe/Paris";
-    i18n.defaultLocale = "en_US.UTF-8";
-    i18n.extraLocaleSettings = {
-      LC_ADDRESS = "fr_FR.UTF-8";
-      LC_IDENTIFICATION = "fr_FR.UTF-8";
-      LC_MEASUREMENT = "fr_FR.UTF-8";
-      LC_MONETARY = "fr_FR.UTF-8";
-      LC_NAME = "fr_FR.UTF-8";
-      LC_NUMERIC = "fr_FR.UTF-8";
-      LC_PAPER = "fr_FR.UTF-8";
-      LC_TELEPHONE = "fr_FR.UTF-8";
-      LC_TIME = "fr_FR.UTF-8";
-    };
+    i18n.defaultLocale = "fr_FR.UTF-8";
 
     programs.fish.enable = true;
 
@@ -120,8 +103,12 @@
         "video"
         "render"
         "audio"
+        "input"
         "storage"
         "gamemode"
+      ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMKEUyD7riAHBYuRqajNOv+kRWK7b/ORBrVNtmBCipfl aristide.pichereau@gmail.com"
       ];
     };
 
@@ -146,9 +133,9 @@
     home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
+      backupFileExtension = "hm-backup";
       extraSpecialArgs = {
         inherit inputs;
-        head = config.head;
         darkMode = config.darkMode;
       };
       users.${config.primaryUser} = import ../home/home.nix;
