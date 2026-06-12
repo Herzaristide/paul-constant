@@ -24,6 +24,10 @@
     killUnconfinedConfinables = false;
   };
 
+  security.sudo.extraConfig = ''
+    Defaults pwfeedback
+  '';
+
   security.auditd.enable = true;
   security.audit = {
     enable = false;

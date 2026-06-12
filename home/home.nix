@@ -14,6 +14,7 @@
 
   programs.home-manager.enable = true;
   programs.fish.enable = true;
+  programs.git.enable = true;
 
   home.sessionVariables = {
     EDITOR = "nano";
@@ -41,6 +42,7 @@
 
     # Gaming
     prismlauncher
+    heroic
 
     # AI tooling — claude-code est le CLI officiel. Claude lui-même est
     # installé comme PWA via la policy Chromium dans home/chromium.nix
@@ -73,6 +75,10 @@
     };
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,maximize,close";
+    };
+    "org/gnome/terminal/legacy/keybindings" = {
+      copy = "<Primary>c";
+      paste = "<Primary>v";
     };
     "org/gnome/shell" = {
       favorite-apps = [
